@@ -19,7 +19,7 @@ class ExpenseState extends Equatable {
   final List<Expense> expenses;
   final ExpenseStatus status;
   final String? error;
-  final String searchQuery;
+  final String? searchQuery;
   final ExpenseCategory? selectCategory;
   final DateTime? filterStartDate;
   final DateTime? filterEndDate;
@@ -40,19 +40,26 @@ class ExpenseState extends Equatable {
     List<Expense>? expenses,
     ExpenseStatus? status,
     String? error,
+    bool clearError = false,
     String? searchQuery,
     ExpenseCategory? selectCategory,
     DateTime? filterStartDate,
     DateTime? filterEndDate,
+    bool clearDates = false,
+    bool clearCategory = false,
   }) {
     return ExpenseState(
-        expenses: expenses ?? this.expenses,
-        status: status ?? this.status,
-        searchQuery: searchQuery ?? this.searchQuery,
-        selectCategory: selectCategory ?? this.selectCategory,
-        filterStartDate: filterStartDate ?? this.filterStartDate,
-        filterEndDate: filterEndDate ?? this.filterEndDate,
-        error: error ?? this.error,
+      expenses: expenses ?? this.expenses,
+      status: status ?? this.status,
+      searchQuery: searchQuery ?? this.searchQuery,
+      selectCategory: clearCategory
+          ? null
+          : (selectCategory ?? this.selectCategory),
+      filterStartDate: clearDates
+          ? null
+          : (filterStartDate ?? this.filterStartDate),
+      filterEndDate: clearDates ? null : (filterEndDate ?? this.filterEndDate),
+      error: clearError ? null : (error ?? this.error),
     );
   }
 

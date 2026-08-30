@@ -15,7 +15,7 @@ enum ExpenseCategory {
 
   static ExpenseCategory fromString(String value) {
     return ExpenseCategory.values.firstWhere(
-          (e) => e.name == value.toLowerCase(),
+      (e) => e.name == value.toLowerCase(),
       orElse: () => ExpenseCategory.other,
     );
   }

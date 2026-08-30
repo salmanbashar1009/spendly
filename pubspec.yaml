@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   bloc_signals: ^1.1.0
   bloc_signals_flutter: ^1.2.1
+  signals_flutter: ^7.1.0
   equatable: ^2.1.0
   intl: ^0.20.3
   uuid: ^4.6.0

@@ -1,4 +1,4 @@
-import 'dart:math';
+// ignore_for_file: unused_import
 
 import 'package:spendly/features/expenses/domain/entities/expense.dart';
 
@@ -39,5 +39,4 @@ class InMemoryExpenseRepository implements ExpenseRepository {
     await Future.delayed(const Duration(milliseconds: 100));
     _expenses.removeWhere((e) => e.id == expenseId);
   }
-
 }
