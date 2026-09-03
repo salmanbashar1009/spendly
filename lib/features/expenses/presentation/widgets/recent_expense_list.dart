@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bloc_signals_flutter/bloc_signals_flutter.dart';
 import '../cubits/expense_cubit.dart';
 import '../cubits/expense_state.dart';
+import 'expense_list_item.dart';
 
 class RecentExpensesList extends StatelessWidget {
   const RecentExpensesList({super.key});
