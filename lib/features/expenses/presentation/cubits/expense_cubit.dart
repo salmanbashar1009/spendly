@@ -185,34 +185,39 @@ class ExpenseCubit extends CubitSignal<ExpenseState> {
     }).toList();
   });
 
-/// Total spending this month (in cents).
-  late final monthlyTotalCents = computed((){
-    return monthlyExpenses.value.fold<int>(0, (sum,e)=> sum + e.amountInCents);
+  /// Total spending this month (in cents).
+  late final monthlyTotalCents = computed(() {
+    return monthlyExpenses.value.fold<int>(
+      0,
+      (sum, e) => sum + e.amountInCents,
+    );
   });
 
   /// Total spending across all expenses in cents
-  late final grandTotalCents = computed((){
+  late final grandTotalCents = computed(() {
     return state.value.expenses.fold<int>(0, (sum, e) => sum + e.amountInCents);
   });
 
   /// Breakdown of spending by category
-  late final categoryTotals = computed((){
+  late final categoryTotals = computed(() {
     final totals = <ExpenseCategory, int>{};
-    for (final expense in state.value.expenses){
-      totals[expense.category] = (totals[expense.category] ?? 0) + expense.amountInCents;
+    for (final expense in state.value.expenses) {
+      totals[expense.category] =
+          (totals[expense.category] ?? 0) + expense.amountInCents;
     }
     return totals;
   });
 
   /// Number of transactions
-  late final transactionCount = computed(()=> state.value.expenses.length);
+  late final transactionCount = computed(() => state.value.expenses.length);
 
   /// Top spending category
-  late final topCategory = computed((){
-    if(categoryTotals.value.isEmpty) return null;
-    return categoryTotals.value.entries.reduce((a,b)=> a.value > b.value ? a : b).key;
+  late final topCategory = computed(() {
+    if (categoryTotals.value.isEmpty) return null;
+    return categoryTotals.value.entries
+        .reduce((a, b) => a.value > b.value ? a : b)
+        .key;
   });
-
 
   // ─────────────────────────────────────────────
   // DEMO DATA
@@ -268,5 +273,4 @@ class ExpenseCubit extends CubitSignal<ExpenseState> {
     }
     await loadExpenses();
   }
-
 }
