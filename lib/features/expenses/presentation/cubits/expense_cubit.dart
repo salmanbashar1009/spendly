@@ -1,4 +1,5 @@
 import 'package:bloc_signals/bloc_signals.dart';
+import 'package:flutter/foundation.dart';
 import 'package:signals_flutter/signals_flutter.dart';
 import 'package:spendly/features/expenses/domain/entities/expense.dart';
 import 'package:spendly/features/expenses/domain/entities/expense_category.dart';
@@ -18,17 +19,32 @@ class ExpenseCubit extends CubitSignal<ExpenseState> {
   // ─────────────────────────────────────────────
 
   Future<void> loadExpenses() async {
-    emit(stateValue.copyWith(status: ExpenseStatus.loading, clearError: true));
     try {
+      final hasData = await _repository.hasExpenses();
+      if (!hasData) {
+        // Data is not available — skip full load function and emit empty success state directly
+        emit(
+          stateValue.copyWith(
+            expenses: [],
+            status: ExpenseStatus.success,
+            clearError: true,
+          ),
+        );
+        return;
+      }
+
+      // Data is available — proceed to load expenses
+      emit(stateValue.copyWith(status: ExpenseStatus.loading, clearError: true));
       final expenses = await _repository.getExpenses();
       emit(
         stateValue.copyWith(expenses: expenses, status: ExpenseStatus.success),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('ExpenseCubit.loadExpenses error: $e\n$stackTrace');
       emit(
         stateValue.copyWith(
           status: ExpenseStatus.failure,
-          error: 'Failed to load expenses: $e',
+          error: 'Unable to load expenses: $e',
         ),
       );
     }
@@ -60,11 +76,12 @@ class ExpenseCubit extends CubitSignal<ExpenseState> {
           clearError: true,
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('ExpenseCubit.addExpense error: $e\n$stackTrace');
       emit(
         stateValue.copyWith(
           status: ExpenseStatus.failure,
-          error: 'Failed to add expense: $e',
+          error: 'Unable to save expense: $e',
         ),
       );
     }
@@ -81,11 +98,12 @@ class ExpenseCubit extends CubitSignal<ExpenseState> {
           clearError: true,
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('ExpenseCubit.updateExpense error: $e\n$stackTrace');
       emit(
         stateValue.copyWith(
           status: ExpenseStatus.failure,
-          error: 'Failed to update expenses: $e',
+          error: 'Unable to update expense: $e',
         ),
       );
     }
@@ -102,14 +120,19 @@ class ExpenseCubit extends CubitSignal<ExpenseState> {
           clearError: true,
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('ExpenseCubit.deleteExpense error: $e\n$stackTrace');
       emit(
         stateValue.copyWith(
           status: ExpenseStatus.failure,
-          error: 'Failed to delete expense: $e',
+          error: 'Unable to delete expense: $e',
         ),
       );
     }
+  }
+
+  void setSearchQuery(String query) {
+    emit(stateValue.copyWith(searchQuery: query));
   }
 
   void setCategoryFilter(ExpenseCategory? category) {

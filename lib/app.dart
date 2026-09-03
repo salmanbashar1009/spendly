@@ -10,17 +10,17 @@ class SpendlyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Spendly',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-      ),
-      home: BlocSignalProvider(
-        create: (context) =>
-            ExpenseCubit(InMemoryExpenseRepository())..seedDemoData(),
-        child: const DashboardScreen(),
+    return BlocSignalProvider(
+      create: (context) =>
+          ExpenseCubit(SqfliteExpenseRepository())..loadExpenses(),
+      child: MaterialApp(
+        title: 'Spendly',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        ),
+        home: const DashboardScreen(),
       ),
     );
   }

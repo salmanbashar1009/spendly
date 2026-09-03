@@ -41,6 +41,28 @@ class Expense extends Equatable {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'amountInCents': amountInCents,
+      'category': category.name,
+      'description': description,
+      'date': date.toIso8601String(),
+      'createdAt': createdAt.toIso8601String(),
+    };
+  }
+
+  factory Expense.fromMap(Map<String, dynamic> map) {
+    return Expense(
+      id: map['id'] as String,
+      amountInCents: map['amountInCents'] as int,
+      category: ExpenseCategory.fromString(map['category'] as String),
+      description: map['description'] as String,
+      date: DateTime.parse(map['date'] as String),
+      createdAt: DateTime.parse(map['createdAt'] as String),
+    );
+  }
+
   @override
   List<Object?> get props => [
     id,

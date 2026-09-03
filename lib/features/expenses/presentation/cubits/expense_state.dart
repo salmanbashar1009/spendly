@@ -24,6 +24,8 @@ class ExpenseState extends Equatable {
   final DateTime? filterStartDate;
   final DateTime? filterEndDate;
 
+  ExpenseCategory? get selectedCategory => selectCategory;
+
   factory ExpenseState.initial() {
     return const ExpenseState(
       expenses: [],
