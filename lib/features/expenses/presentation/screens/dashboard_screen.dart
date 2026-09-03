@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:spendly/features/expenses/presentation/cubits/expense_cubit.dart';
 import 'package:spendly/features/expenses/presentation/cubits/expense_state.dart';
 
+import '../widgets/category_breakdown.dart';
 import '../widgets/dashboard_summary.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -52,8 +53,8 @@ class DashboardScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DashboardSummary(),
-                // SizedBox(height: 24),
-                // CategoryBreakdown(),
+                SizedBox(height: 24),
+                CategoryBreakdown(),
                 // SizedBox(height: 24),
                 // RecentExpensesList(),
               ],
