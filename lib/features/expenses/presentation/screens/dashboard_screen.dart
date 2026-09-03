@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:spendly/features/expenses/presentation/cubits/expense_cubit.dart';
 import 'package:spendly/features/expenses/presentation/cubits/expense_state.dart';
 
+import '../widgets/dashboard_summary.dart';
+
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
@@ -49,10 +51,7 @@ class DashboardScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Dashboard summary"),
-                Text("category"),
-                Text("Recent Expense"),
-                // DashboardSummary(),
+                DashboardSummary(),
                 // SizedBox(height: 24),
                 // CategoryBreakdown(),
                 // SizedBox(height: 24),
