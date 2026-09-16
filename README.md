@@ -25,7 +25,7 @@
 ---
 
 ## 📱 Screenshots & User Experience
-![onboard.png](assets/screenshots/onboard.png)![dashboard.png](assets/screenshots/dashboard.png)![category.png](assets/screenshots/category.png)![filter.png](assets/screenshots/filter.png)
+![onboard.png](assets/screenshots/onboard.png) ![dashboard.png](assets/screenshots/dashboard.png)  ![category.png](assets/screenshots/category.png)  ![filter.png](assets/screenshots/filter.png)
 
 | Empty Onboarding | Dashboard Overview | Category Breakdown | Filter & Search |
 | :---: | :---: | :---: | :---: |
