@@ -25,9 +25,10 @@
 ---
 
 ## 📱 Screenshots & User Experience
+![onboard.png](assets/screenshots/onboard.png)![dashboard.png](assets/screenshots/dashboard.png)![category.png](assets/screenshots/category.png)![filter.png](assets/screenshots/filter.png)
 
 | Empty Onboarding | Dashboard Overview | Category Breakdown | Filter & Search |
-| :---:![onboard.png](assets/screenshots/onboard.png) | :---: | :---: | :---: |
+| :---: | :---: | :---: | :---: |
 | Welcome greeting guiding first-time expense entry | Monthly totals, recent transactions & quick actions | Interactive category spending visualizer | Search query, category chips & date range filters |
 
 ---
