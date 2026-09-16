@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bloc_signals_flutter/bloc_signals_flutter.dart';
 import '../cubits/expense_cubit.dart';
 import '../cubits/expense_state.dart';
+import '../screens/add_expense_screen.dart';
 import '../screens/expense_list_screen.dart';
 import 'expense_list_item.dart';
 
@@ -78,7 +79,61 @@ class RecentExpensesList extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            ...displayList.map((expense) => ExpenseListItem(expense: expense)),
+            ...displayList.map((expense) => Dismissible(
+                  key: Key(expense.id),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 20),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  confirmDismiss: (direction) async {
+                    return await showDialog<bool>(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: const Text('Delete Expense'),
+                        content: const Text(
+                          'Are you sure you want to delete this expense?',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(ctx, false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(ctx, true),
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.red,
+                            ),
+                            child: const Text('Delete'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  onDismissed: (_) {
+                    context.read<ExpenseCubit>().deleteExpense(expense.id);
+                  },
+                  child: ExpenseListItem(
+                    expense: expense,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AddExpenseScreen(expense: expense),
+                        ),
+                      );
+                    },
+                  ),
+                )),
           ],
         );
       },

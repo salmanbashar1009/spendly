@@ -16,6 +16,44 @@ class AddExpenseScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEditing ? 'Edit Expense' : 'Add Expense'),
+        actions: [
+          if (isEditing)
+            IconButton(
+              icon: const Icon(Icons.delete, color: Colors.redAccent),
+              tooltip: 'Delete Expense',
+              onPressed: () async {
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Delete Expense'),
+                    content: const Text(
+                      'Are you sure you want to delete this expense?',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx, false),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx, true),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.red,
+                        ),
+                        child: const Text('Delete'),
+                      ),
+                    ],
+                  ),
+                );
+
+                if (confirm == true && context.mounted) {
+                  await context.read<ExpenseCubit>().deleteExpense(expense!.id);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                }
+              },
+            ),
+        ],
       ),
       body: ExpenseForm(
         expense: expense,

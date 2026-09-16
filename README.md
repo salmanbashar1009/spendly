@@ -10,6 +10,8 @@
 
 ---
 
+## Download APK: https://drive.google.com/file/d/129sK8VGRFB8739Zexa6_ROWr_lKEuAV0/view?usp=sharing
+
 ## 🌟 Key Features
 
 - 📊 **Dashboard Overview**: Real-time spending summary including total monthly expenses, transaction counts, top spending category, and category-wise percentage breakdown.
@@ -25,7 +27,7 @@
 ---
 
 ## 📱 Screenshots & User Experience
-![onboard.png](assets/screenshots/onboard.png) ![dashboard.png](assets/screenshots/dashboard.png)  ![category.png](assets/screenshots/category.png)  ![filter.png](assets/screenshots/filter.png)
+![onboard.png](assets/screenshots/onboard.png) ![dashboard.png](assets/screenshots/dashboard.png)  ![category.png](assets/screenshots/category.png)  ![filter.png](assets/screenshots/filter.png)  ![delete.png](assets/screenshots/delete.png)  ![edit.png](assets/screenshots/edit.png)
 
 | Empty Onboarding | Dashboard Overview | Category Breakdown | Filter & Search |
 | :---: | :---: | :---: | :---: |
